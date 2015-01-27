@@ -1,0 +1,6 @@
+---
+starman_nr_workers: 32
+starman_port: 5000
+starman_user: "www-data"
+starman_pid: "/var/run/starman.pid"
+starman_log: "/var/log/starman/starman.log"

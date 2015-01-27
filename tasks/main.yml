@@ -1,0 +1,7 @@
+---
+- name: install starman
+  apt: name=starman state=present
+
+- name: put eye config
+  template: src=starman.rb dest=/etc/eye/starman.rb
+  notify: reload eye

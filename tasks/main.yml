@@ -5,3 +5,4 @@
 - name: put eye config
   template: src=starman.rb dest=/etc/eye/starman.rb
   notify: reload eye
+  tags: config

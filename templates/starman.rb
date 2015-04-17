@@ -8,7 +8,8 @@ Eye.application 'starman' do
     pid_file '{{ starman_pid }}'
     start_command 'starman --user={{ starman_user }} --listen :{{ starman_port }} --workers {{ starman_nr_workers }} --daemonize --pid {{ starman_pid }} --error-log {{ starman_log }} {{ starman_app }}'
     stop_command 'kill -QUIT {PID}'
-    restart_command 'kill -HUP {PID}'
+    # restart_command 'kill -HUP {PID}'
+    command :'reload', 'kill -HUP {PID}'
 
     start_timeout 10.seconds
     stop_timeout 5.seconds

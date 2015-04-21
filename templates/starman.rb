@@ -1,6 +1,6 @@
 Eye.application 'starman' do
   working_dir '/'
-  stdall '/var/log/eye/starman-stdall.log' # stdout,err logs for processes by default
+  stdall '/var/log/eye{{ '-' + eye_user if eye_user != 'root' else '' }}/starman-stdall.log' # stdout,err logs for processes by default
   trigger :flapping, times: 10, within: 1.minute, retry_in: 3.minutes
   check :cpu, every: 10.seconds, below: 100, times: 3 # global check for all processes
 

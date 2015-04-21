@@ -1,4 +1,0 @@
----
-- name: reload eye
-  command: bash -c "source /usr/local/rvm/scripts/rvm && eye l /etc/eye/apps.eye"
-  sudo: yes

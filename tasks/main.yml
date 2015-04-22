@@ -13,3 +13,8 @@
     - starman
     - config
   
+- name: create log dir for starman
+  file: path={{ starman_log|regex_replace('[^/]{1,}$','') }} state=directory owner={{ eye_user }}
+  tags:
+    - eye
+    - starman

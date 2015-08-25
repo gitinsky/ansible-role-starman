@@ -1,0 +1,9 @@
+# starman logrotate configuration file, {{ ansible_managed }}
+
+{{ starman_log }} {
+    rotate 31
+    daily
+    compress
+    missingok
+    su {{ starman_user }} {{ eye_user }}
+}

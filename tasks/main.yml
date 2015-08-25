@@ -18,3 +18,10 @@
   tags:
     - eye
     - starman
+
+- name: setup logrotate
+  template: src=logrotate.d/starman dest=/etc/logrotate.d/starman_{{ starman_user }}
+  tags:
+    - eye
+    - starman
+    - logrotate

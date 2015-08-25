@@ -6,4 +6,8 @@
     compress
     missingok
     su {{ starman_user }} {{ eye_user }}
+    copytruncate
+    postrotate
+        bash -c "source /usr/local/rvm/scripts/rvm && eye restart forwarder"
+    endscript
 }

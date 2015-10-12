@@ -7,7 +7,9 @@
 
 - name: put eye config
   template: src=starman.rb dest={{ eye_home }}/starman.rb
-  notify: reload eye
+  notify:
+      - reload eye
+      - eye restart starman
   tags:
     - eye
     - starman

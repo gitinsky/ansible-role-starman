@@ -2,4 +2,8 @@
   command: bash -c "source /usr/local/rvm/scripts/rvm && eye restart starman"
   sudo: yes
   sudo_user: "{{ eye_user }}"
-  
+
+- name: eye reload starman
+  command: bash -c "source /usr/local/rvm/scripts/rvm && eye us reload starman"
+  sudo: yes
+  sudo_user: "{{ eye_user }}"

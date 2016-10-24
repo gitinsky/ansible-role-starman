@@ -14,11 +14,16 @@
     - eye
     - starman
     - config
+  when: "ansible_distribution == 'Ubuntu' and (ansible_distribution_version|version_compare(14.04, '<='))"
   
 - name: create log dir for starman
-  file: path={{ starman_log|regex_replace('[^/]{1,}$','') }} state=directory owner={{ eye_user }}
+  file: path={{ starman_log|regex_replace('[^/]{1,}$','') }} state=directory owner={{ starman_user }}
   tags:
-    - eye
+    - starman
+
+- name: create PID dir for starman
+  file: path={{ starman_pid|regex_replace('[^/]{1,}$','') }} state=directory owner={{ starman_user }}
+  tags:
     - starman
 
 - name: setup logrotate
@@ -27,3 +32,14 @@
     - eye
     - starman
     - logrotate
+
+- name: put systemd unit file to its destination
+  template: src=starman.service dest=/etc/systemd/system/starman.service owner=root group=root mode=0644
+  when: "ansible_distribution == 'Ubuntu' and (ansible_distribution_version|version_compare(14.04, '>'))"
+  notify: systemctl daemon-reload
+
+- meta: flush_handlers
+
+- name: enable starman service
+  service: name=starman enabled=yes state=started
+  when: "ansible_distribution == 'Ubuntu' and (ansible_distribution_version|version_compare(14.04, '>'))"

@@ -1,0 +1,15 @@
+[Unit]
+Description=Starman Service
+
+[Service]
+Type=forking
+User={{ starman_user }}
+Group={{ starman_user }}
+ExecStart=/usr/bin/starman --user={{ starman_user }} --listen :{{ starman_port }} --workers {{ starman_nr_workers }} --daemonize --pid {{ starman_pid }} --error-log {{ starman_log }} {{ starman_app }}
+PIDFile={{ starman_pid }}
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+Alias=starman.service

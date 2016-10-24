@@ -12,3 +12,6 @@
   command: bash -c "source /usr/local/rvm/scripts/rvm && eye stop starman"
   sudo: yes
   sudo_user: "{{ eye_user }}"
+
+- name: systemctl daemon-reload
+  shell: systemctl daemon-reload

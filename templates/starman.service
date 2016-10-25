@@ -3,6 +3,9 @@ Description=Starman Service
 
 [Service]
 Type=forking
+{% for env_name,env_value in starman_envvars.iteritems() %}
+Environment={{ env_name }}={{ env_value }}
+{% endfor %}
 User={{ starman_user }}
 Group={{ starman_user }}
 ExecStart=/usr/bin/starman --user={{ starman_user }} --listen :{{ starman_port }} --workers {{ starman_nr_workers }} --daemonize --pid {{ starman_pid }} --error-log {{ starman_log }} {{ starman_app }}

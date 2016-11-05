@@ -8,6 +8,8 @@ Environment={{ env_name }}={{ env_value }}
 {% endfor %}
 User={{ starman_user }}
 Group={{ starman_user }}
+PermissionsStartOnly=true
+ExecStartPre=/bin/bash -c 'test -d {{ starman_pid|regex_replace('[^/]{1,}$','') }} || mkdir {{ starman_pid|regex_replace('[^/]{1,}$','') }} && chown {{ starman_user }}:{{ starman_user }} {{ starman_pid|regex_replace('[^/]{1,}$','') }}'
 ExecStart=/usr/bin/starman --user={{ starman_user }} --listen :{{ starman_port }} --workers {{ starman_nr_workers }} --daemonize --pid {{ starman_pid }} --error-log {{ starman_log }} {{ starman_app }}
 PIDFile={{ starman_pid }}
 StandardOutput=journal
